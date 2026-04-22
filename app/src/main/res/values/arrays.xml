@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="priority_categories">
+        <item>Important and Urgent</item>
+        <item>Important but Not Urgent</item>
+        <item>Urgent but Not Important</item>
+        <item>Neither Urgent nor Important</item>
+    </string-array>
+
+    <string-array name="task_statuses">
+        <item>Pending</item>
+        <item>In Progress</item>
+        <item>Completed</item>
+    </string-array>
+
+    <string-array name="filter_options">
+        <item>All Priorities</item>
+        <item>Important and Urgent</item>
+        <item>Important but Not Urgent</item>
+        <item>Urgent but Not Important</item>
+        <item>Neither Urgent nor Important</item>
+    </string-array>
+</resources>

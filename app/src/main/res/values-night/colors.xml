@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_blue">#7FA6FF</color>
+    <color name="primary_blue_dark">#2B3D73</color>
+    <color name="secondary_purple">#B197FF</color>
+    <color name="accent_green">#51D89A</color>
+    <color name="soft_bg">#0F1726</color>
+    <color name="surface_card">#182235</color>
+    <color name="text_primary">#F5F7FF</color>
+    <color name="text_secondary">#A8B4CC</color>
+    <color name="urgent_red">#FF8A98</color>
+    <color name="amber">#FFC869</color>
+    <color name="cyan">#72D9F5</color>
+    <color name="completed_gray">#90A0BC</color>
+    <color name="divider_light">#243149</color>
+    <color name="chip_bg">#243656</color>
+    <color name="chip_text">#CFE0FF</color>
+    <color name="matrix_iu_bg">#3A2230</color>
+    <color name="matrix_in_bg">#2D2743</color>
+    <color name="matrix_nu_bg">#1F3440</color>
+    <color name="matrix_nn_bg">#3B3323</color>
+    <color name="nav_surface">#182235</color>
+    <color name="nav_item_tint">#CFE0FF</color>
+    <color name="dashboard_panel_text">#D6E2FF</color>
+</resources>
