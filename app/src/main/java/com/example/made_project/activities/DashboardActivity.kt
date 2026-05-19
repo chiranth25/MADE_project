@@ -17,6 +17,7 @@ import com.example.made_project.models.TaskModel
 import com.example.made_project.utils.SharedPrefManager
 import com.example.made_project.utils.UiAnimator
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.Calendar
 
 class DashboardActivity : BaseActivity() {
 
@@ -24,7 +25,7 @@ class DashboardActivity : BaseActivity() {
     private lateinit var sharedPrefManager: SharedPrefManager
     private lateinit var taskAdapter: TaskAdapter
     private lateinit var recyclerView: RecyclerView
-    private lateinit var emptyStateText: TextView
+    private lateinit var emptyStateView: View
     private lateinit var searchView: SearchView
     private lateinit var filterSpinner: Spinner
     private var allTasks: List<TaskModel> = emptyList()
@@ -38,15 +39,17 @@ class DashboardActivity : BaseActivity() {
         sharedPrefManager = SharedPrefManager(this)
 
         recyclerView = findViewById(R.id.recyclerRecentTasks)
-        emptyStateText = findViewById(R.id.textEmptyState)
+        emptyStateView = findViewById(R.id.layoutEmptyState)
         searchView = findViewById(R.id.searchTasks)
         filterSpinner = findViewById(R.id.spinnerFilter)
 
-        findViewById<TextView>(R.id.textWelcomeUser).text = "Hello, ${sharedPrefManager.getUserName()}"
+        findViewById<TextView>(R.id.textWelcomeUser).text =
+            "${getGreetingMessage()}, ${sharedPrefManager.getUserName()}"
         val addTaskFab = findViewById<FloatingActionButton>(R.id.fabAddTask)
         addTaskFab.setOnClickListener {
             startActivity(Intent(this, AddTaskActivity::class.java))
         }
+        setupPriorityMatrixClicks()
 
         taskAdapter = TaskAdapter(emptyList()) { task ->
             val intent = Intent(this, TaskDetailsActivity::class.java)
@@ -124,10 +127,42 @@ class DashboardActivity : BaseActivity() {
             matchesQuery && matchesFilter
         }
         taskAdapter.updateTasks(filteredTasks.take(6))
-        emptyStateText.visibility = if (filteredTasks.isEmpty()) View.VISIBLE else View.GONE
+        emptyStateView.visibility = if (filteredTasks.isEmpty()) View.VISIBLE else View.GONE
     }
 
     private fun countByPriority(priority: String): Int {
         return activeTasks.count { it.priorityType == priority }
+    }
+
+    private fun setupPriorityMatrixClicks() {
+        // Each existing matrix card opens the same screen and sends only the selected priority name.
+        findViewById<View>(R.id.cardMatrixIU).setOnClickListener {
+            openPriorityTasks("Important and Urgent")
+        }
+        findViewById<View>(R.id.cardMatrixIN).setOnClickListener {
+            openPriorityTasks("Important but Not Urgent")
+        }
+        findViewById<View>(R.id.cardMatrixNU).setOnClickListener {
+            openPriorityTasks("Urgent but Not Important")
+        }
+        findViewById<View>(R.id.cardMatrixNN).setOnClickListener {
+            openPriorityTasks("Neither Urgent nor Important")
+        }
+    }
+
+    private fun openPriorityTasks(priorityType: String) {
+        val intent = Intent(this, PriorityTasksActivity::class.java)
+        intent.putExtra("priority_type", priorityType)
+        startActivity(intent)
+    }
+
+    private fun getGreetingMessage(): String {
+        // Calendar reads the phone's current system time.
+        val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        return when {
+            currentHour < 12 -> "Good Morning"
+            currentHour < 17 -> "Good Afternoon"
+            else -> "Good Evening"
+        }
     }
 }

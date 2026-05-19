@@ -3,7 +3,6 @@ package com.example.made_project.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.made_project.R
@@ -15,14 +14,14 @@ class CompletedTasksActivity : BaseActivity() {
 
     private lateinit var databaseHelper: DatabaseHelper
     private lateinit var taskAdapter: TaskAdapter
-    private lateinit var emptyStateText: TextView
+    private lateinit var emptyStateView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_completed_tasks)
 
         databaseHelper = DatabaseHelper(this)
-        emptyStateText = findViewById(R.id.textCompletedEmptyState)
+        emptyStateView = findViewById(R.id.layoutCompletedEmptyState)
 
         taskAdapter = TaskAdapter(emptyList()) { task ->
             val intent = Intent(this, TaskDetailsActivity::class.java)
@@ -46,7 +45,7 @@ class CompletedTasksActivity : BaseActivity() {
         super.onResume()
         val completedTasks = databaseHelper.getCompletedTasks()
         taskAdapter.updateTasks(completedTasks)
-        emptyStateText.visibility = if (completedTasks.isEmpty()) View.VISIBLE else View.GONE
+        emptyStateView.visibility = if (completedTasks.isEmpty()) View.VISIBLE else View.GONE
         findViewById<RecyclerView>(R.id.recyclerCompletedTasks).scheduleLayoutAnimation()
     }
 }

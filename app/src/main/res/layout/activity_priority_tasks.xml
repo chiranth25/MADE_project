@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/soft_bg"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarPriorityTasks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:navigationIcon="@android:drawable/ic_media_previous"
+        android:title="Priority Tasks" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerPriorityTasks"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp" />
+
+        <TextView
+            android:id="@+id/textPriorityEmptyState"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="24dp"
+            android:text="No tasks in this category"
+            android:textColor="@color/text_secondary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </FrameLayout>
+</LinearLayout>
